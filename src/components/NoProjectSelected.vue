@@ -10,7 +10,9 @@
 			Select a project or get started with a new one
 		</p>
 		<p class="mt-8">
-			<Button @click="onStartAddProject">Create new project</Button>
+			<Button @click="projectStore.handleAddStartProject"
+				>Create new project</Button
+			>
 		</p>
 	</div>
 </template>
@@ -18,6 +20,7 @@
 <script setup>
 import Logo from "/logo.png"
 import Button from "./Button.vue"
-import { defineProps } from "vue"
-const props = defineProps(["onStartAddProject"])
+import useProjectStore from "../stores/projectStore"
+
+const projectStore = useProjectStore()
 </script>

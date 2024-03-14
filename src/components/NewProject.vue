@@ -1,8 +1,29 @@
 <template>
+	<div v-if="showModal" class="absolute inset-0 bg-black opacity-75"></div>
+	<Modal
+		class="absolute"
+		v-if="showModal"
+		title="Okay"
+		@closeModal="closeModal"
+	>
+		<h2 className="text-xl font-bold text-stone-700 my-4">Invalid Input</h2>
+		<p className="text-stone-600 mb-4">
+			Oops ... Looks like you forgot to enter a value.
+		</p>
+		<p className="text-stone-600 mb-4">
+			Please make sure you provide a valid value for every input field.
+		</p>
+	</Modal>
+
 	<div class="w-[35rem] mt-16">
 		<menu class="flex items-center justify-end gap-4 my-4">
 			<li>
-				<button class="text-stone-800 hover:text-stone-950">Cancel</button>
+				<button
+					@click="projectStore.cancelAddProject"
+					class="text-stone-800 hover:text-stone-950"
+				>
+					Cancel
+				</button>
 			</li>
 			<li>
 				<button
@@ -35,11 +56,10 @@
 <script setup>
 import { ref } from "vue"
 
-const textArea = ref(true)
+import Modal from "./Modal.vue"
 import useProjectStore from "../stores/projectStore"
 
 const projectStore = useProjectStore()
-
 const cl_p = "flex flex-col gap-1 my-4"
 const cl_label = " text-sm font-bold uppercase text-stone-500"
 const cl_input =
@@ -48,13 +68,18 @@ const cl_input =
 const title = ref("")
 const description = ref("")
 const dueDate = ref("")
+const showModal = ref(false)
 
+function closeModal() {
+	showModal.value = false
+}
 function handleSave() {
 	if (
 		title.value.trim() === "" ||
 		description.value.trim() === "" ||
 		dueDate.value.trim() === ""
 	) {
+		showModal.value = true
 		return
 	}
 	const dataProject = {

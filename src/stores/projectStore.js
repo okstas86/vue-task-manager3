@@ -11,6 +11,10 @@ export const useProjectStore = defineStore("projectStore", () => {
 		projectState.value.selectedProjectId = null
 	}
 
+	const cancelAddProject = () => {
+		projectState.value.selectedProjectId = undefined
+	}
+
 	const handleAddProject = projectData => {
 		const projectId = Math.random()
 		const newProject = {
@@ -24,6 +28,7 @@ export const useProjectStore = defineStore("projectStore", () => {
 		projectState,
 		handleAddStartProject,
 		handleAddProject,
+		cancelAddProject,
 	}
 })
 

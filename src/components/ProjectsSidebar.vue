@@ -10,12 +10,11 @@
 				+ Add Project
 			</Button>
 		</div>
-		<ul
-			class="mt-8"
-			v-for="project in projectStore.projectState.projects"
-			:key="project.id"
-		>
-			<li>
+		<ul class="mt-8">
+			<li
+				v-for="project in projectStore.projectState.projects"
+				:key="project.id"
+			>
 				<button
 					:class="
 						project.id === projectStore.projectState.selectedProjectId

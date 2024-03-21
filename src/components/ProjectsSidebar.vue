@@ -16,6 +16,7 @@
 				:key="project.id"
 			>
 				<button
+					@click="projectStore.handleSelectProject(project.id)"
 					:class="
 						project.id === projectStore.projectState.selectedProjectId
 							? cl_btn + ' bg-stone-800 text-stone-200'
@@ -31,7 +32,7 @@
 
 <script setup>
 import Button from "./Button.vue"
-import { defineProps } from "vue"
+
 import useProjectStore from "../stores/projectStore"
 
 const projectStore = useProjectStore()
